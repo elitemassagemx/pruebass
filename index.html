@@ -48,6 +48,25 @@
             </div>
         </section>
 
+        <section id="galeria" class="section gallery gallery-container">
+            <div class="container">
+                <h2>Galería de Imágenes</h2>
+                <div id="gallery-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="Galería de imágenes">
+                    <div class="carousel-inner">
+                        <!-- Las imágenes del carrusel se generarán dinámicamente con JavaScript -->
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#gallery-carousel" data-bs-slide="prev" aria-label="Imagen anterior">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#gallery-carousel" data-bs-slide="next" aria-label="Imagen siguiente">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <section id="servicios" class="section services">
             <div class="container">
                 <h2>Nuestros Servicios</h2>
@@ -86,27 +105,15 @@
             </div>
         </section>
 
-        <section id="galeria" class="section gallery gallery-container">
+        <section id="conocenos" class="section gallery gallery-container">
             <div class="container">
-                <h2>Galería de Imágenes</h2>
-                <div id="gallery-carousel" class="carousel slide" data-bs-ride="carousel" aria-label="Galería de imágenes">
-                    <div class="carousel-inner">
-                        <!-- Las imágenes del carrusel se generarán dinámicamente con JavaScript -->
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#gallery-carousel" data-bs-slide="prev" aria-label="Imagen anterior">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#gallery-carousel" data-bs-slide="next" aria-label="Imagen siguiente">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Siguiente</span>
-                    </button>
-                </div>
                 <h3>Conócenos</h3>
                 <div class="gallery-grid">
                     <!-- Las imágenes de la galería en cuadrícula se generarán dinámicamente con JavaScript -->
                 </div>
-                <button id="ver-mas-galeria" class="ver-mas-btn">Ver más</button>
+                <div class="ver-mas-container">
+                    <a href="galeria.html" id="ver-mas-galeria" class="ver-mas-btn">Ver más</a>
+                </div>
             </div>
         </section>
     </main>
@@ -124,9 +131,24 @@
 
     <nav class="fixed-bar" aria-label="Navegación principal">
         <ul>
-            <li><a href="#servicios" aria-label="Ir a sección de masajes"><img src="https://elitemassagemx.github.io/Home/IMG/dorado.webp" alt="" class="nav-icon"><span class="nav-text">Masajes</span></a></li>
-            <li><a href="#experiencias" aria-label="Ir a sección de experiencias"><img src="https://elitemassagemx.github.io/Home/IMG/paqp.webp" alt="" class="nav-icon"><span class="nav-text">Paquetes</span></a></li>
-            <li><a href="tuplan.html" aria-label="Crear plan personalizado"><img src="https://elitemassagemx.github.io/Home/IMG/idea.webp" alt="" class="nav-icon"><span class="nav-text">Tu Plan</span></a></li>
+            <li>
+                <a href="#servicios" aria-label="Ir a sección de masajes">
+                    <img src="https://elitemassagemx.github.io/Home/IMG/dorado.webp" alt="" class="nav-icon">
+                    <span class="nav-text">Masajes y<br>Experiencias</span>
+                </a>
+            </li>
+            <li>
+                <a href="#experiencias" aria-label="Ir a sección de experiencias">
+                    <img src="https://elitemassagemx.github.io/Home/IMG/paqp.webp" alt="" class="nav-icon">
+                    <span class="nav-text">Menú de<br>Servicios</span>
+                </a>
+            </li>
+            <li>
+                <a href="tuplan.html" aria-label="Crear plan personalizado">
+                    <img src="https://elitemassagemx.github.io/Home/IMG/idea.webp" alt="" class="nav-icon">
+                    <span class="nav-text">Tu Plan<br>Personalizado</span>
+                </a>
+            </li>
         </ul>
     </nav>
 
@@ -138,7 +160,7 @@
             <p id="popup-description"></p>
             <div class="popup-details">
                 <div class="popup-benefits">
-                    <!-- Los IMG y textos de beneficios se generarán dinámicamente -->
+                    <!-- Los iconos y textos de beneficios se generarán dinámicamente -->
                 </div>
                 <div class="popup-includes">
                     <!-- La lista de 'includes' se generará dinámicamente -->
@@ -171,7 +193,7 @@
                 </div>
                 <p class="service-description"></p>
                 <div class="benefits-container">
-                    <!-- Los IMG y textos de beneficios se generarán dinámicamente -->
+                    <!-- Los iconos y textos de beneficios se generarán dinámicamente -->
                 </div>
                 <div class="duration-container">
                     <img src="https://elitemassagemx.github.io/Home/IMG/duration-icon.webp" alt="" class="duration-icon">
@@ -198,7 +220,7 @@
                     <span class="package-duration-text"></span>
                 </div>
                 <div class="package-benefits">
-                    <!-- Los IMG y textos de beneficios se generarán dinámicamente -->
+                    <!-- Los iconos y textos de beneficios se generarán dinámicamente -->
                 </div>
                 <div class="package-buttons">
                     <button class="saber-mas-button">Saber más</button>
