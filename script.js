@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             
-            packageElement.querySelector('.package-duration-text').textContent = pkg.duration || 'Duración no especificada';
+        packageElement.querySelector('.package-duration-text').textContent = pkg.duration || 'Duración no especificada';
             
             const benefitsContainer = packageElement.querySelector('.package-benefits');
             if (benefitsContainer && Array.isArray(pkg.benefitsIcons)) {
@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const allBenefits = new Set();
         const benefitIcons = new Map();
 
-    if (services[category]) {
+        if (services[category]) {
             services[category].forEach(service => {
                 if (Array.isArray(service.benefits) && Array.isArray(service.benefitsIcons)) {
                     service.benefits.forEach((benefit, index) => {
@@ -479,44 +479,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Aquí deberías cargar las imágenes de la galería desde tu fuente de datos
         const galleryImages = [
-    { src: 'QUESOSAHM.webp', title: 'Tabla Gourmet', description: 'Después de tu masaje en pareja saborea una exquisita selección de jamón curado, quesos gourmet, fresas cubiertas de chocolate y copas de vino. Un toque de lujo y placer compartido para complementar tu visita' },
-    { src: 'choco2.webp', title: 'choco2', description: 'LLENAR' },
-    { src: 'chococ.webp', title: 'chococ', description: 'LLENAR' },
-    { src: 'chococc.webp', title: 'chococc', description: 'LLENAR' },
-    { src: 'FRESASC.webp', title: 'fresasc', description: 'LLENAR' },
-    { src: 'QUESOS.webp', title: 'quesos', description: 'LLENAR' },
-    { src: 'QUESOSH.webp', title: 'quesosh', description: 'LLENAR' },
-    { src: 'QUESOSHM.webp', title: 'quesoshm', description: 'LLENAR' },
-    { src: 'QUESOSM.webp', title: 'quesosm', description: 'LLENAR' },
-    { src: 'QUESOSIG.webp', title: 'quesosig', description: 'LLENAR' },
-    { src: 'SILLAS.webp', title: 'sillas', description: 'LLENAR' },
-    { src: 'SILLASH.webp', title: 'sillash', description: 'LLENAR' },
-    { src: 'chen.webp', title: 'chen', description: 'LLENAR' },
-    { src: 'copas.webp', title: 'copas', description: 'LLENAR' },
-    { src: 'dif.webp', title: 'dif', description: 'LLENAR' },
-    { src: 'QUESOSAHM.webp', title: 'quesosahm', description: 'LLENAR' },
-    { src: 'jamc.webp', title: 'jamc', description: 'LLENAR' },
-    { src: 'jam.webp', title: 'jam', description: 'LLENAR' },
-    { src: 'lujo.webp', title: 'lujo', description: 'LLENAR' },
-    { src: 'lujo2.webp', title: 'lujo2', description: 'LLENAR' },
-    { src: 'noche.webp', title: 'noche', description: 'LLENAR' },
-    { src: 'noche1.webp', title: 'noche1', description: 'LLENAR' },
-    { src: 'paq1.webp', title: 'paq1', description: 'LLENAR' },
-    { src: 'paq2.webp', title: 'paq2', description: 'LLENAR' },
-    { src: 'paq41.webp', title: 'paq41', description: 'LLENAR' },
-    { src: 'rosa.webp', title: 'rosa', description: 'LLENAR' },
-    { src: 'rosal.webp', title: 'rosal', description: 'LLENAR' },
-    { src: 'rosao.webp', title: 'rosao', description: 'LLENAR' },
-    { src: 'semillas.webp', title: 'semillas', description: 'LLENAR' },
-    { src: 'sub.webp', title: 'sub', description: 'LLENAR' },
-    { src: 'spa.webp', title: 'spa', description: 'LLENAR' },
-    { src: 'buda2.webp', title: 'buda2', description: 'LLENAR' },
-    { src: 'mesap2.webp', title: 'mesap2', description: 'LLENAR' },
-    { src: 'papas.webp', title: 'papas', description: 'LLENAR' },
-    { src: 'mesa.webp', title: 'mesa', description: 'LLENAR' },
-    { src: 'buda.webp', title: 'Buda', description: 'LLENAR' },
-];
-
+            { src: 'QUESOSAHM.webp', title: 'Tabla Gourmet', description: 'Después de tu masaje en pareja saborea una exquisita selección de jamón curado, quesos gourmet, fresas cubiertas de chocolate y copas de vino. Un toque de lujo y placer compartido para complementar tu visita' },
+            { src: 'choco2.webp', title: 'choco2', description: 'LLENAR' },
+            { src: 'chococ.webp', title: 'chococ', description: 'LLENAR' },
+            { src: 'chococc.webp', title: 'chococc', description: 'LLENAR' },
+            { src: 'FRESASC.webp', title: 'fresasc', description: 'LLENAR' },
+            { src: 'QUESOS.webp', title: 'quesos', description: 'LLENAR' },
+            { src: 'QUESOSH.webp', title: 'quesosh', description: 'LLENAR' },
+            { src: 'QUESOSHM.webp', title: 'quesoshm', description: 'LLENAR' },
+            { src: 'QUESOSM.webp', title: 'quesosm', description: 'LLENAR' },
+            { src: 'QUESOSIG.webp', title: 'quesosig', description: 'LLENAR' },
+            { src: 'SILLAS.webp', title: 'sillas', description: 'LLENAR' },
+            { src: 'SILLASH.webp', title: 'sillash', description: 'LLENAR' },
+            { src: 'chen.webp', title: 'chen', description: 'LLENAR' },
+            { src: 'copas.webp', title: 'copas', description: 'LLENAR' },
+            { src: 'dif.webp', title: 'dif', description: 'LLENAR' },
+            { src: 'QUESOSAHM.webp', title: 'quesosahm', description: 'LLENAR' },
+            { src: 'jamc.webp', title: 'jamc', description: 'LLENAR' },
+            { src: 'jam.webp', title: 'jam', description: 'LLENAR' },
+            { src: 'lujo.webp', title: 'lujo', description: 'LLENAR' },
+            { src: 'lujo2.webp', title: 'lujo2', description: 'LLENAR' },
+            { src: 'noche.webp', title: 'noche', description: 'LLENAR' },
+            { src: 'noche1.webp', title: 'noche1', description: 'LLENAR' },
+            { src: 'paq1.webp', title: 'paq1', description: 'LLENAR' },
+            { src: 'paq2.webp', title: 'paq2', description: 'LLENAR' },
+            { src: 'paq41.webp', title: 'paq41', description: 'LLENAR' },
+            { src: 'rosa.webp', title: 'rosa', description: 'LLENAR' },
+            { src: 'rosal.webp', title: 'rosal', description: 'LLENAR' },
+            { src: 'rosao.webp', title: 'rosao', description: 'LLENAR' },
+            { src: 'semillas.webp', title: 'semillas', description: 'LLENAR' },
+            { src: 'sub.webp', title: 'sub', description: 'LLENAR' },
+            { src: 'spa.webp', title: 'spa', description: 'LLENAR' },
+            { src: 'buda2.webp', title: 'buda2', description: 'LLENAR' },
+            { src: 'mesap2.webp', title: 'mesap2', description: 'LLENAR' },
+            { src: 'papas.webp', title: 'papas', description: 'LLENAR' },
+            { src: 'mesa.webp', title: 'mesa', description: 'LLENAR' },
+            { src: 'buda.webp', title: 'Buda', description: 'LLENAR' },
+        ];
 
         // Configurar el carrusel
         galleryImages.forEach((image, index) => {
@@ -556,8 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         verMasButton.addEventListener('click', () => {
-            galleryGrid.style.display = galleryGrid.style.display === 'none' ? 'grid' : 'none';
-            verMasButton.textContent = galleryGrid.style.display === 'none' ? 'Ver más' : 'Ver menos';
+            window.location.href = 'galeria.html';
         });
     }
 
