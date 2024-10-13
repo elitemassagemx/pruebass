@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (services[category]) {
             services[category].forEach(service => {
-                if (Array.isArray(service.benefits) && Array.isArray(service.benefitsIcons)) {
+                if (Array.isArray(service.benefits) && Array.isArray(service.benefitsIcons)) {                        
                     service.benefits.forEach((benefit, index) => {
                         if (!allBenefits.has(benefit)) {
                             allBenefits.add(benefit);
