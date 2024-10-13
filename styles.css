@@ -16,7 +16,6 @@ body, h1, h2, h3, p, ul {
     box-sizing: border-box;
 }
 
-
 body {
     font-family: 'Quattrocento', serif;
     font-size: 16px;
@@ -559,6 +558,8 @@ footer {
 
 .social-media {
     margin-top: 10px;
+
+
 }
 
 .social-media a {
@@ -591,6 +592,7 @@ footer {
     margin-top: 15px;
     color: white;
     text-align: center;
+    font-weight: bold;
 }
 
 /* Responsive adjustments */
@@ -837,4 +839,27 @@ body {
 .service-item h3,
 .package-item h3 {
     font-family: 'Tenor Sans', sans-serif;
+}
+
+/* Fix for carousel image issue */
+.carousel-item {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    position: relative;
+}
+
+/* Ensure white text in popup windows */
+#imageModal .modal-description,
+.popup-content * {
+    color: white;
+    font-weight: bold;
 }
