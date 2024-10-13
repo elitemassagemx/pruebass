@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const gallery = document.getElementById('gallery');
-  const body = document.body;
 
   galleryImages.forEach((image, index) => {
     const div = document.createElement('div');
@@ -58,18 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
     div.appendChild(a);
     gallery.appendChild(div);
 
-    // Create lightbox
-    const lightbox = document.createElement('div');
-    lightbox.id = `lightbox-${index}`;
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-      <div class="content">
-        <img src="${BASE_URL + image.src}" alt="${image.title}">
-        <p class="title">${image.title} - ${image.description}</p>
-        <a href="#gallery" class="close"></a>
-      </div>
-    `;
-    body.appendChild(lightbox);
+    // Update lightbox content
+    const lightbox = document.getElementById(`lightbox-${index}`);
+    if (lightbox) {
+      const lightboxImg = lightbox.querySelector('img');
+      const lightboxTitle = lightbox.querySelector('.title');
+      
+      lightboxImg.src = BASE_URL + image.src;
+      lightboxImg.alt = image.title;
+      lightboxTitle.textContent = `${image.title} - ${image.description}`;
+    }
   });
 
   // Close lightbox when clicking outside the image
