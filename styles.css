@@ -12,8 +12,7 @@
 /* Reset y estilos base */
 body, h1, h2, h3, p, ul {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    padding: 0;box-sizing: border-box;
 }
 
 body {
@@ -33,7 +32,7 @@ h1, h2, h3 {
 
 h2 {
     font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 img {
@@ -96,7 +95,7 @@ h1 {
 
 /* Secciones */
 .section {
-    padding: 30px 0;
+    padding: 20px 0;
     margin-top: 70px; /* Ajustado para el header fijo */
 }
 
@@ -176,7 +175,9 @@ h1 {
 .benefit-btn span, .package-btn span {
     font-size: 12px;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+    line-height: 1.2;
+    max-width: 80px;
 }
 
 .benefit-btn.active, .package-btn.active {
@@ -535,6 +536,8 @@ h1 {
     font-size: 10px;
     line-height: 1.2;
     text-align: center;
+    white-space: normal;
+    max-width: 80px;
 }
 
 /* Footer styles */
@@ -723,8 +726,7 @@ a:focus, button:focus {
 
 /* Ver más button styles */
 .ver-mas-btn {
-    display: block;
-    margin: 20px auto;
+    display: inline-block;
     padding: 10px 20px;
     background-color: var(--primary-color);
     color: var(--background-color);
@@ -738,156 +740,97 @@ a:focus, button:focus {
     background-color: var(--gold);
 }
 
-/* Estilos existentes ... */
-
-/* Estilos para Tu Plan */
-.tu-plan {
-    padding-top: 80px;
-}
-
-.plan-form {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: var(--background-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.form-progress {
-    height: 5px;
-    background-color: #e0e0e0;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
-}
-
-.form-step {
-    display: none;
-}
-
-.option-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.option-item {
-    display: flex;
-    align-items: center;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.option-item:hover {
-    background-color: #e0e0e0;
-}
-
-.option-item input {
-    margin-right: 10px;
-}
-
-.hidden {
-    display: none;
-}
-
-textarea, input[type="text"], input[type="tel"], input[type="email"], input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.form-navigation {
-    display: flex;
-    justify-content: space-between;
+.ver-mas-container {
+    text-align: right;
     margin-top: 20px;
 }
 
-.nav-btn, .submit-btn {
-    padding: 10px 20px;
-    background-color: var(--primary-color);
+/* Carousel adjustments */
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-item-next:not(.carousel-item-start),
+.active.carousel-item-end {
+    transform: translateX(100%);
+}
+
+.carousel-item-prev:not(.carousel-item-end),
+.active.carousel-item-start {
+    transform: translateX(-100%);
+}
+
+.carousel-item-next.carousel-item-start,
+.carousel-item-prev.carousel-item-end {
+    transform: translateX(0);
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.carousel-caption h5,
+.carousel-caption p {
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.nav-btn:hover, .submit-btn:hover {
-    background-color: var(--gold);
+/* Ensure content is not hidden behind fixed header */
+body {
+    padding-top: 80px; /* Adjust this value based on your header height */
 }
 
-.contact-preference {
-    margin-top: 20px;
+/* Additional styles for gallery section */
+#galeria {
+    padding-top: 20px;
 }
 
-/* Estilos para el toggle personalizado */
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+.gallery-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+#conocenos {
+    padding-top: 40px;
 }
 
-.toggle-slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 34px;
+#conocenos h3 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.toggle-slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
+/* Ensure text contrast in gallery items */
+.image-overlay h3,
+.image-overlay p {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
-input:checked + .toggle-slider {
-    background-color: var(--primary-color);
+/* Additional styles to ensure text readability */
+.service-item p,
+.package-item p,
+.testimonial p {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
-input:checked + .toggle-slider:before {
-    transform: translateX(26px);
+/* Ensure popup text is readable */
+.popup-content p,
+.popup-content h2,
+.popup-benefits-item span,
+.popup-includes-item span,
+.popup-duration span {
+    color: var(--text-color);
+    text-shadow: none;
 }
 
-/* Ajustes responsivos */
-@media (max-width: 768px) {
-    .option-group {
-        flex-direction: column;
-    }
-    
-    .option-item {
-        width: 100%;
-    }
+/* Adjust font for service and package items to match project fonts */
+.service-item,
+.package-item {
+    font-family: 'Quattrocento', serif;
 }
 
-@import 'galeria';
+.service-item h3,
+.package-item h3 {
+    font-family: 'Tenor Sans', sans-serif;
+}
