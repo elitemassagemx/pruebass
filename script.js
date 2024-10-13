@@ -1,4 +1,4 @@
-const BASE_URL = "https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/";
+const BASE_URL = "https://raw.githubusercontent.com/elitemassagemx/Home/main/IMG/";
 let services = {};
 let currentPopupIndex = 0;
 
@@ -685,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Manejo de errores de carga de imágenes
     document.querySelectorAll('img').forEach(img => {
         img.addEventListener('error', function() {
-            this.src = 'https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/error.webp';
+            this.src = 'https://raw.githubusercontent.com/elitemassagemx/Home/main/IMG/error.webp';
         });
     });
 });
