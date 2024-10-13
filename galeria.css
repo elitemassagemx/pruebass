@@ -1,0 +1,182 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 5px;
+  position: relative;
+}
+
+#gallery {
+  display: grid;
+  height: auto;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 0.5em;
+  padding: 10px;
+}
+@media (max-width: 800px) {
+  #gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
+#gallery > div {
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+  aspect-ratio: 1/1;
+}
+@media (max-width: 800px) {
+  #gallery > div {
+    width: 48%;
+    margin: 1%;
+  }
+}
+@media (max-width: 800px) and (max-width: 350px) {
+  #gallery > div {
+    width: 98%;
+  }
+}
+@media (min-width: 800px) {
+  #gallery > div:nth-child(6n+1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  #gallery > div:nth-child(2) {
+    grid-column: span 3;
+    grid-row: span 3;
+  }
+  #gallery > div:nth-child(4) {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+}
+#gallery > div > a {
+  opacity: 0;
+  position: absolute;
+  color: #000;
+  background-color: #000;
+  font: bold 1.5em "Helvetica";
+  padding: 1rem;
+  mix-blend-mode: difference;
+  width: 100%;
+  height: 100%;
+  transition: all 450ms ease-in-out;
+  text-shadow: 0 -1px 2px #fff, -1px 0px 2px #fff, 0 1px 2px #fff, 1px 0px 2px #fff;
+}
+#gallery > div > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 450ms ease-in-out;
+}
+#gallery > div:hover img {
+  filter: blur(4px);
+}
+#gallery > div:hover a {
+  opacity: 1;
+}
+#gallery div,
+#gallery a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 450ms ease-in-out;
+  pointer-events: none;
+}
+.lightbox:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lightbox:target img {
+  filter: blur(0);
+}
+.lightbox .content {
+  max-width: 90%;
+  max-height: 90%;
+  position: relative;
+  color: #fff;
+}
+.lightbox .content:hover > a.close {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+.lightbox .content:hover > .title {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+.lightbox .content:hover > .title::after {
+  opacity: 1;
+}
+.lightbox .content > * {
+  transition: all 450ms ease-in-out;
+}
+.lightbox .title {
+  display: block;
+  margin: 0;
+  padding: 1em;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform: translateY(50%);
+  font-size: 1.2em;
+  opacity: 0;
+}
+.lightbox .title::after {
+  content: " ";
+  background-color: rgba(0, 0, 0, 0.4);
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transition: all 450ms ease-in-out;
+  opacity: 0;
+  transform-origin: bottom;
+  mix-blend-mode: soft-light;
+}
+.lightbox img {
+  max-height: 80vh;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+}
+.lightbox a.close {
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0, 0);
+  opacity: 0;
+  transform-origin: right top;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5em;
+  border-radius: 50%;
+}
+.lightbox a.close::after {
+  content: "×";
+}
