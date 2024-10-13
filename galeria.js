@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const BASE_URL = "https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/";
+
   const galleryImages = [
     { src: 'QUESOSAHM.webp', title: 'Tabla Gourmet', description: 'Después de tu masaje en pareja saborea una exquisita selección de jamón curado, quesos gourmet, fresas cubiertas de chocolate y copas de vino. Un toque de lujo y placer compartido para complementar tu visita' },
     { src: 'choco2.webp', title: 'Chocolate', description: 'Deliciosos chocolates para disfrutar después del masaje' },
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const img = document.createElement('img');
     const a = document.createElement('a');
     
-    img.src = image.src;
+    img.src = BASE_URL + image.src;
     img.alt = image.title;
     img.loading = 'lazy';
     
@@ -62,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.className = 'lightbox';
     lightbox.innerHTML = `
       <div class="content">
-        <img src="${image.src}" alt="${image.title}">
+        <img src="${BASE_URL + image.src}" alt="${image.title}">
         <p class="title">${image.title} - ${image.description}</p>
         <a href="#gallery" class="close"></a>
       </div>
