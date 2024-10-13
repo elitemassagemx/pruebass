@@ -30,9 +30,10 @@ body {
 // Gallery
 #gallery {
   display: grid;
-  height: calc(100vh - 10px);
-  grid-template: repeat($gallery-size, 1fr) / repeat($gallery-size, 1fr);
+  height: auto;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: $gallery-gap;
+  padding: 10px;
 
   @media (max-width: $mobile-breakpoint) {
     @include flex-center;
@@ -69,7 +70,7 @@ body {
 }
 
 // Lightbox
-[id^="lightbox-"] {
+.lightbox {
   @include lightboxBase;
   
   &:target {
@@ -101,17 +102,21 @@ body {
 }
 
 @mixin gridStructure {
-  &:nth-child(#{$gallery-size}n + 1) {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-  &:nth-child(2) {
-    grid-column: span 3;
-    grid-row: span 3;
-  }
-  &:nth-child(4) {
-    grid-column: span 1;
-    grid-row: span 2;
+  aspect-ratio: 1 / 1;
+  
+  @media (min-width: $mobile-breakpoint) {
+    &:nth-child(#{$gallery-size}n + 1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    &:nth-child(2) {
+      grid-column: span 3;
+      grid-row: span 3;
+    }
+    &:nth-child(4) {
+      grid-column: span 1;
+      grid-row: span 2;
+    }
   }
 }
 
@@ -122,7 +127,8 @@ body {
 
   & > img {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    object-fit: cover;
     @include transition;
   }
 
@@ -141,14 +147,14 @@ body {
   position: absolute;
   color: #000;
   background-color: #000;
-  font: bold 4em "Helvetica";
-  padding: 2rem;
+  font: bold 1.5em "Helvetica";
+  padding: 1rem;
   mix-blend-mode: difference;
   width: 100%;
   height: 100%;
   @include transition;
 
-  $shadow: 5px #fff;
+  $shadow: 2px #fff;
   text-shadow: 
     0 -1px $shadow,
     -1px 0px $shadow,
@@ -172,7 +178,7 @@ body {
 
 @mixin lightboxTarget {
   opacity: 1;
-  pointer-events: inherit;
+  pointer-events: auto;
   img {
     filter: blur(0);
   }
@@ -180,6 +186,7 @@ body {
 
 @mixin lightboxContent {
   max-width: 90%;
+  max-height: 90%;
   position: relative;
   color: #fff;
 
@@ -210,7 +217,7 @@ body {
   bottom: 0;
   width: 100%;
   transform: translateY(50%);
-  font-size: 1.5em;
+  font-size: 1.2em;
   opacity: 0;
 
   &::after {
@@ -229,19 +236,19 @@ body {
 }
 
 @mixin lightboxImage {
-  max-height: 90vh;
+  max-height: 80vh;
   max-width: 100%;
   margin: 0;
   padding: 0;
-  filter: blur(50px);
+  object-fit: contain;
 }
 
 @mixin closeButton {
   width: 2em;
   height: 2em;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 10px;
   background-color: rgba(black, 0.5);
   @include flex-center;
   transform: scale(0, 0);
@@ -249,8 +256,10 @@ body {
   transform-origin: right top;
   text-decoration: none;
   color: #fff;
+  font-size: 1.5em;
+  border-radius: 50%;
 
   &::after {
-    content: "X";
+    content: "×";
   }
 }
