@@ -373,6 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
         benefitsNav.innerHTML = '';
         const allBenefits = new Set();
         const benefitIcons = new Map();
+        const benefitAlternativeText = new Map();
 
         if (services[category]) {
             services[category].forEach(service => {
@@ -381,6 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (!allBenefits.has(benefit)) {
                             allBenefits.add(benefit);
                             benefitIcons.set(benefit, service.benefitsIcons[index]);
+                            benefitAlternativeText.set(benefit, getAlternativeText(benefit));
                         }
                     });
                 }
@@ -392,7 +394,8 @@ document.addEventListener('DOMContentLoaded', () => {
         allButton.dataset.filter = 'all';
         allButton.innerHTML = `
             <img src="${BASE_URL}todos.webp" alt="Todos" style="width: 48px; height: 48px;">
-            <span>Todos</span>
+            <span class="visible-text">Todos</span>
+            <span class="hidden-text visually-hidden">all</span>
         `;
         benefitsNav.appendChild(allButton);
 
@@ -402,15 +405,41 @@ document.addEventListener('DOMContentLoaded', () => {
             button.dataset.filter = benefit.toLowerCase().replace(/\s+/g, '-');
             
             const iconUrl = benefitIcons.get(benefit) || `${BASE_URL}${benefit.toLowerCase().replace(/\s+/g, '-')}.webp`;
+            const alternativeText = benefitAlternativeText.get(benefit);
             
             button.innerHTML = `
                 <img src="${buildImageUrl(iconUrl)}" alt="${benefit}" style="width: 48px; height: 48px;">
-                <span>${benefit}</span>
+                <span class="visible-text">${alternativeText}</span>
+                <span class="hidden-text visually-hidden">${benefit}</span>
             `;
             benefitsNav.appendChild(button);
         });
 
         setupFilterButtons('.benefits-nav', '#services-list', '.service-item');
+    }
+
+    function getAlternativeText(benefit) {
+        const alternativeTexts = {
+            "Bajará tu Estrés": "Relax",
+            "Cambiará tu Ánimo": "Ánimo",
+            "Aliviarás Tensiones": "Alivio",
+            "Aliviarás Dolores Musculares": "Músculos",
+            "Mejorarás tu Circulación": "Circula",
+            "Relajación Profunda": "Profundo",
+            "Relajación": "Relax",
+            "Alivio de Dolores en Espalda y Cuello": "Espalda",
+            "Relajación Total": "Total",
+            "Mejora Circulación Sanguínea": "Sangre",
+            "Hidratará tu Piel": "Hidrata",
+            "Multisensorial": "Sentidos",
+            "Mejorarás tu Equilibrio": "Balance",
+            "Reducirás el Estrés": "Anti-estrés",
+            "Aumento de Energía": "Energía",
+            "Alivio Dolor Muscular": "No dolor",
+            "Reduce Ansiedad": "Calma",
+            "Calma Profunda": "Sereno"
+        };
+        return alternativeTexts[benefit] || benefit;
     }
 
     function setupPackageNav() {
@@ -662,7 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                const filter = button.getAttribute('data-filter');
+                const filter = button.querySelector('.hidden-text').textContent.toLowerCase().replace(/\s+/g, '-');
                 
                 // Actualizar botones activos
                 filterButtons.forEach(btn => btn.classList.remove('active'));
