@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             
-        packageElement.querySelector('.package-duration-text').textContent = pkg.duration || 'Duración no especificada';
+            packageElement.querySelector('.package-duration-text').textContent = pkg.duration || 'Duración no especificada';
             
             const benefitsContainer = packageElement.querySelector('.package-benefits');
             if (benefitsContainer && Array.isArray(pkg.benefitsIcons)) {
@@ -249,8 +249,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const popupTitle = getElement('popup-title');
         const popupImage = getElement('popup-image');
         const popupDescription = getElement('popup-description');
-        const popupBenefits = getElement('popup-benefits');
-        const popupIncludes = getElement('popup-includes');
+        const popupBenefits = popup.querySelector('.popup-benefits');
+        const popupIncludes = popup.querySelector('.popup-includes');
         const popupDuration = getElement('popup-duration');
         const whatsappButton = getElement('whatsapp-button');
         if (!popup || !popupContent || !popupTitle || !popupImage || !popupDescription || !popupBenefits || !popupIncludes || !popupDuration || !whatsappButton) {
@@ -502,7 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { src: 'noche.webp', title: 'noche', description: 'LLENAR' },
             { src: 'noche1.webp', title: 'noche1', description: 'LLENAR' },
             { src: 'paq1.webp', title: 'paq1', description: 'LLENAR' },
-            { src: 'paq2.webp', title: 'paq2', description: 'LLENAR' },
+            { src: 'paq2.webp', title: 'paq2', description: 'LLENAR' },            
             { src: 'paq41.webp', title: 'paq41', description: 'LLENAR' },
             { src: 'rosa.webp', title: 'rosa', description: 'LLENAR' },
             { src: 'rosal.webp', title: 'rosal', description: 'LLENAR' },
