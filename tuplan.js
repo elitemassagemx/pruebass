@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showStep(stepIndex) {
         steps.forEach((step, index) => {
-            step.style.display = index === stepIndex ? 'block' : 'none';
+            step.classList.toggle('active', index === stepIndex);
         });
-        prevBtn.style.display = stepIndex === 0 ? 'none' : 'inline-block';
-        nextBtn.style.display = stepIndex === steps.length - 1 ? 'none' : 'inline-block';
-        submitBtn.style.display = stepIndex === steps.length - 1 ? 'inline-block' : 'none';
+        prevBtn.style.display = stepIndex === 0 ? 'none' : 'inline-flex';
+        nextBtn.style.display = stepIndex === steps.length - 1 ? 'none' : 'inline-flex';
+        submitBtn.style.display = stepIndex === steps.length - 1 ? 'inline-flex' : 'none';
         updateProgressBar();
     }
 
@@ -57,17 +57,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     nextBtn.addEventListener('click', () => {
-        if (validateStep(steps[currentStep]) && currentStep < steps.length - 1) {
+        if (validateStep(steps[currentStep])) {
             currentStep++;
             showStep(currentStep);
         }
     });
 
     prevBtn.addEventListener('click', () => {
-        if (currentStep > 0) {
-            currentStep--;
-            showStep(currentStep);
-        }
+        currentStep--;
+        showStep(currentStep);
     });
 
     form.addEventListener('submit', (e) => {
@@ -155,6 +153,85 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltip.remove();
         }
     }
+
+    // Mostrar/ocultar campo de texto para "Otro" en Tipo de Experiencia
+    const otroExperienciaCheckbox = form.querySelector('input[name="experiencia"][value="otro"]');
+    const otroExperienciaInput = document.getElementById('otro-experiencia');
+
+    otroExperienciaCheckbox.addEventListener('change', function() {
+        otroExperienciaInput.classList.toggle('hidden', !this.checked);
+    });
+
+    // Animación suave al cambiar de paso
+    function smoothTransition(step) {
+        step.style.opacity = 0;
+        step.style.transform = 'translateX(20px)';
+        setTimeout(() => {
+            step.style.opacity = 1;
+            step.style.transform = 'translateX(0)';
+        }, 50);
+    }
+
+    // Modificar la función showStep para incluir la animación
+    function showStep(stepIndex) {
+        steps.forEach((step, index) => {
+            if (index === stepIndex) {
+                step.classList.add('active');
+                smoothTransition(step);
+            } else {
+                step.classList.remove('active');
+            }
+        });
+        prevBtn.style.display = stepIndex === 0 ? 'none' : 'inline-flex';
+        nextBtn.style.display = stepIndex === steps.length - 1 ? 'none' : 'inline-flex';
+        submitBtn.style.display = stepIndex === steps.length - 1 ? 'inline-flex' : 'none';
+        updateProgressBar();
+    }
+
+    // Función para validar el correo electrónico
+    function validateEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    // Función para validar el número de teléfono (formato mexicano)
+    function validatePhone(phone) {
+        const re = /^(\+?52|0)?\s?1?\s?[2-9]\d{2}\s?\d{3}\s?\d{4}$/;
+        return re.test(phone);
+    }
+
+    // Modificar la función validateStep para incluir validaciones específicas
+    function validateStep(step) {
+        const inputs = step.querySelectorAll('input[required], select[required], textarea[required]');
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                isValid = false;
+                showErrorMessage(input, 'Este campo es requerido');
+            } else if (input.type === 'email' && !validateEmail(input.value)) {
+                isValid = false;
+                showErrorMessage(input, 'Por favor, ingrese un correo electrónico válido');
+            } else if (input.type === 'tel' && !validatePhone(input.value)) {
+                isValid = false;
+                showErrorMessage(input, 'Por favor, ingrese un número de teléfono válido');
+            } else {
+                hideErrorMessage(input);
+            }
+        });
+        return isValid;
+    }
+
+    // Función para mostrar un mensaje de confirmación antes de guardar el progreso
+    function confirmSaveProgress() {
+        const confirmed = confirm('¿Estás seguro de que quieres guardar tu progreso? Podrás continuar más tarde desde donde lo dejaste.');
+        if (confirmed) {
+            saveProgress();
+        }
+    }
+
+    // Reemplazar el evento click del botón de guardar progreso
+    saveProgressBtn.removeEventListener('click', saveProgress);
+    saveProgressBtn.addEventListener('click', confirmSaveProgress);
 
     // Inicializar
     showStep(currentStep);
