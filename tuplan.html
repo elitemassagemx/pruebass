@@ -280,4 +280,52 @@
                         <textarea name="comentarios" rows="4" placeholder="Escribe aquí cualquier detalle o solicitud especial"></textarea>
                     </div>
 
-                    <div class="
+<div class="form-step" id="step10">
+                        <h3><i class="fas fa-address-card"></i> Información de contacto</h3>
+                        <div class="contact-form">
+                            <input type="text" name="nombre" placeholder="Nombre" required>
+                            <input type="tel" name="telefono" placeholder="Teléfono" required>
+                            <input type="email" name="email" placeholder="Correo electrónico" required>
+                            <input type="date" name="fecha" placeholder="Fecha preferida para la experiencia" required>
+                        </div>
+                        <div class="contact-preference">
+                            <h4><i class="fas fa-phone-alt"></i> Medio de contacto preferido:</h4>
+                            <label class="option-item">
+                                <input type="radio" name="contacto" value="llamada">
+                                <i class="fas fa-phone"></i>
+                                <span>Te marcamos</span>
+                            </label>
+                            <label class="option-item">
+                                <input type="radio" name="contacto" value="whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Te mandamos mensaje por WhatsApp</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" id="prev-btn" class="nav-btn"><i class="fas fa-arrow-left"></i> Anterior</button>
+                        <button type="button" id="next-btn" class="nav-btn">Siguiente <i class="fas fa-arrow-right"></i></button>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="submit-btn">Crear Mi Experiencia Perfecta</button>
+                    <button type="button" class="save-progress-btn" data-tooltip="Guarda tu progreso para continuar más tarde"><i class="fas fa-save"></i> Guardar Progreso</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Elite Massage. Todos los derechos reservados.</p>
+            <div class="social-media">
+                <a href="https://facebook.com/elitemassage" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/elitemassage" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/elitemassage" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="tu-plan.js"></script>
+</body>
+</html>
