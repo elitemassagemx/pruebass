@@ -1,84 +1,90 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('plan-form');
-    const steps = Array.from(form.querySelectorAll('.form-step'));
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const submitBtn = document.getElementById('submit-btn');
     const progressBar = document.querySelector('.progress-bar');
     const saveProgressBtn = document.querySelector('.save-progress-btn');
-    let currentStep = 0;
+    const submitBtn = document.getElementById('submit-btn');
 
-    function showStep(stepIndex) {
-        steps.forEach((step, index) => {
-            step.classList.toggle('active', index === stepIndex);
-        });
-        prevBtn.style.display = stepIndex === 0 ? 'none' : 'inline-flex';
-        nextBtn.style.display = stepIndex === steps.length - 1 ? 'none' : 'inline-flex';
-        submitBtn.style.display = stepIndex === steps.length - 1 ? 'inline-flex' : 'none';
-        updateProgressBar();
-    }
-
+    // Función para actualizar la barra de progreso
     function updateProgressBar() {
-        const progress = ((currentStep + 1) / steps.length) * 100;
+        const formFields = form.querySelectorAll('input, select, textarea');
+        const filledFields = Array.from(formFields).filter(field => field.value.trim() !== '').length;
+        const progress = (filledFields / formFields.length) * 100;
         progressBar.style.width = `${progress}%`;
     }
 
-    function validateStep(step) {
-        const inputs = step.querySelectorAll('input[required], select[required], textarea[required]');
-        let isValid = true;
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                isValid = false;
-                input.classList.add('error');
-                showErrorMessage(input, 'Este campo es requerido');
-            } else {
-                input.classList.remove('error');
-                hideErrorMessage(input);
-            }
-        });
-        return isValid;
+    // Añadir evento de input a todos los campos del formulario
+    form.querySelectorAll('input, select, textarea').forEach(field => {
+        field.addEventListener('input', updateProgressBar);
+    });
+
+    // Función para validar campos
+    function validateField(field) {
+        if (field.hasAttribute('required') && !field.value.trim()) {
+            showErrorMessage(field, 'Este campo es requerido');
+            return false;
+        } else if (field.type === 'email' && !validateEmail(field.value)) {
+            showErrorMessage(field, 'Por favor, ingrese un correo electrónico válido');
+            return false;
+        } else if (field.type === 'tel' && !validatePhone(field.value)) {
+            showErrorMessage(field, 'Por favor, ingrese un número de teléfono válido');
+            return false;
+        } else {
+            hideErrorMessage(field);
+            return true;
+        }
     }
 
-    function showErrorMessage(input, message) {
-        let errorMessage = input.nextElementSibling;
+    // Funciones auxiliares para mostrar/ocultar mensajes de error
+    function showErrorMessage(field, message) {
+        let errorMessage = field.nextElementSibling;
         if (!errorMessage || !errorMessage.classList.contains('error-message')) {
             errorMessage = document.createElement('div');
             errorMessage.className = 'error-message';
-            input.parentNode.insertBefore(errorMessage, input.nextSibling);
+            field.parentNode.insertBefore(errorMessage, field.nextSibling);
         }
         errorMessage.textContent = message;
+        field.classList.add('error');
     }
 
-    function hideErrorMessage(input) {
-        const errorMessage = input.nextElementSibling;
+    function hideErrorMessage(field) {
+        const errorMessage = field.nextElementSibling;
         if (errorMessage && errorMessage.classList.contains('error-message')) {
             errorMessage.remove();
         }
+        field.classList.remove('error');
     }
 
-    nextBtn.addEventListener('click', () => {
-        if (validateStep(steps[currentStep])) {
-            currentStep++;
-            showStep(currentStep);
-        }
-    });
+    // Validación de correo electrónico
+    function validateEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
 
-    prevBtn.addEventListener('click', () => {
-        currentStep--;
-        showStep(currentStep);
-    });
+    // Validación de número de teléfono (formato mexicano)
+    function validatePhone(phone) {
+        const re = /^(\+?52|0)?\s?1?\s?[2-9]\d{2}\s?\d{3}\s?\d{4}$/;
+        return re.test(phone);
+    }
 
+    // Evento submit del formulario
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        if (validateStep(steps[currentStep])) {
+        let isValid = true;
+        form.querySelectorAll('input, select, textarea').forEach(field => {
+            if (!validateField(field)) {
+                isValid = false;
+                field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+        if (isValid) {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             console.log('Datos del formulario:', data);
-            // Aquí puedes agregar la lógica para enviar los datos al servidor
             showThankYouMessage();
         }
     });
 
+    // Función para mostrar mensaje de agradecimiento
     function showThankYouMessage() {
         const thankYouMessage = document.createElement('div');
         thankYouMessage.className = 'thank-you-message';
@@ -93,12 +99,19 @@ document.addEventListener('DOMContentLoaded', function() {
         closeBtn.addEventListener('click', () => {
             thankYouMessage.remove();
             form.reset();
-            currentStep = 0;
-            showStep(currentStep);
+            updateProgressBar();
         });
     }
 
-    saveProgressBtn.addEventListener('click', saveProgress);
+    // Funciones para guardar y cargar progreso
+    saveProgressBtn.addEventListener('click', confirmSaveProgress);
+
+    function confirmSaveProgress() {
+        const confirmed = confirm('¿Estás seguro de que quieres guardar tu progreso? Podrás continuar más tarde desde donde lo dejaste.');
+        if (confirmed) {
+            saveProgress();
+        }
+    }
 
     function saveProgress() {
         const formData = new FormData(form);
@@ -121,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
+            updateProgressBar();
             alert('Tu progreso ha sido cargado. Puedes continuar desde donde lo dejaste.');
         }
     }
@@ -162,77 +176,6 @@ document.addEventListener('DOMContentLoaded', function() {
         otroExperienciaInput.classList.toggle('hidden', !this.checked);
     });
 
-    // Animación suave al cambiar de paso
-    function smoothTransition(step) {
-        step.style.opacity = 0;
-        step.style.transform = 'translateX(20px)';
-        setTimeout(() => {
-            step.style.opacity = 1;
-            step.style.transform = 'translateX(0)';
-        }, 50);
-    }
-
-    // Modificar la función showStep para incluir la animación
-    function showStep(stepIndex) {
-        steps.forEach((step, index) => {
-            if (index === stepIndex) {
-                step.classList.add('active');
-                smoothTransition(step);
-            } else {
-                step.classList.remove('active');
-            }
-        });
-        prevBtn.style.display = stepIndex === 0 ? 'none' : 'inline-flex';
-        nextBtn.style.display = stepIndex === steps.length - 1 ? 'none' : 'inline-flex';
-        submitBtn.style.display = stepIndex === steps.length - 1 ? 'inline-flex' : 'none';
-        updateProgressBar();
-    }
-
-    // Función para validar el correo electrónico
-    function validateEmail(email) {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-
-    // Función para validar el número de teléfono (formato mexicano)
-    function validatePhone(phone) {
-        const re = /^(\+?52|0)?\s?1?\s?[2-9]\d{2}\s?\d{3}\s?\d{4}$/;
-        return re.test(phone);
-    }
-
-    // Modificar la función validateStep para incluir validaciones específicas
-    function validateStep(step) {
-        const inputs = step.querySelectorAll('input[required], select[required], textarea[required]');
-        let isValid = true;
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                isValid = false;
-                showErrorMessage(input, 'Este campo es requerido');
-            } else if (input.type === 'email' && !validateEmail(input.value)) {
-                isValid = false;
-                showErrorMessage(input, 'Por favor, ingrese un correo electrónico válido');
-            } else if (input.type === 'tel' && !validatePhone(input.value)) {
-                isValid = false;
-                showErrorMessage(input, 'Por favor, ingrese un número de teléfono válido');
-            } else {
-                hideErrorMessage(input);
-            }
-        });
-        return isValid;
-    }
-
-    // Función para mostrar un mensaje de confirmación antes de guardar el progreso
-    function confirmSaveProgress() {
-        const confirmed = confirm('¿Estás seguro de que quieres guardar tu progreso? Podrás continuar más tarde desde donde lo dejaste.');
-        if (confirmed) {
-            saveProgress();
-        }
-    }
-
-    // Reemplazar el evento click del botón de guardar progreso
-    saveProgressBtn.removeEventListener('click', saveProgress);
-    saveProgressBtn.addEventListener('click', confirmSaveProgress);
-
     // Inicializar
-    showStep(currentStep);
+    updateProgressBar();
 });
