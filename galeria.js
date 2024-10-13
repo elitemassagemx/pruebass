@@ -57,16 +57,22 @@ document.addEventListener('DOMContentLoaded', () => {
     div.appendChild(a);
     gallery.appendChild(div);
 
-    // Update lightbox content
-    const lightbox = document.getElementById(`lightbox-${index}`);
-    if (lightbox) {
-      const lightboxImg = lightbox.querySelector('img');
-      const lightboxTitle = lightbox.querySelector('.title');
-      
-      lightboxImg.src = BASE_URL + image.src;
-      lightboxImg.alt = image.title;
-      lightboxTitle.textContent = `${image.title} - ${image.description}`;
+    // Create or update lightbox
+    let lightbox = document.getElementById(`lightbox-${index}`);
+    if (!lightbox) {
+      lightbox = document.createElement('div');
+      lightbox.id = `lightbox-${index}`;
+      lightbox.className = 'lightbox';
+      document.body.appendChild(lightbox);
     }
+
+    lightbox.innerHTML = `
+      <div class="content">
+        <img src="${BASE_URL + image.src}" alt="${image.title}">
+        <p class="title">${image.title} - ${image.description}</p>
+        <a href="#gallery" class="close"></a>
+      </div>
+    `;
   });
 
   // Close lightbox when clicking outside the image
@@ -77,4 +83,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Ajustar diseño en cambios de tamaño de ventana
+  window.addEventListener('resize', adjustGalleryLayout);
+  adjustGalleryLayout(); // Ajustar al cargar la página
+
+  function adjustGalleryLayout() {
+    const isMobile = window.innerWidth <= 768;
+    gallery.style.display = isMobile ? 'flex' : 'grid';
+    if (isMobile) {
+      gallery.style.flexDirection = 'column';
+      gallery.style.alignItems = 'center';
+    } else {
+      gallery.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+    }
+  }
 });
