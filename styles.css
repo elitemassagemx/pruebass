@@ -12,8 +12,10 @@
 /* Reset y estilos base */
 body, h1, h2, h3, p, ul {
     margin: 0;
-    padding: 0;box-sizing: border-box;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 
 body {
     font-family: 'Quattrocento', serif;
@@ -31,7 +33,7 @@ h1, h2, h3 {
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
@@ -106,7 +108,7 @@ h1 {
 }
 
 .hero h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 10px;
 }
 
@@ -642,7 +644,7 @@ a:focus, button:focus {
 
 /* Final spacing and alignment adjustments */
 .section {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem; /* Reduced space between sections */
 }
 
 .container > *:last-child {
@@ -740,9 +742,11 @@ a:focus, button:focus {
     background-color: var(--gold);
 }
 
-.ver-mas-container {
-    text-align: right;
-    margin-top: 20px;
+.conocenos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 /* Carousel adjustments */
