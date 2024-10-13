@@ -84,9 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Ajustar diseño en cambios de tamaño de ventana
+  // Adjust layout on window resize
   window.addEventListener('resize', adjustGalleryLayout);
-  adjustGalleryLayout(); // Ajustar al cargar la página
+  adjustGalleryLayout(); // Adjust on page load
 
   function adjustGalleryLayout() {
     const isMobile = window.innerWidth <= 768;
