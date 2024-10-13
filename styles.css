@@ -25,6 +25,7 @@ body {
     padding-bottom: 60px;
     text-size-adjust: 100%;
     transition: background-color 0.3s ease, color 0.3s ease;
+    padding-top: 60px; /* Ajustado para el header fijo */
 }
 
 h1, h2, h3 {
@@ -96,14 +97,14 @@ h1 {
 
 /* Secciones */
 .section {
-    padding: 20px 0;
-    margin-top: 70px; /* Ajustado para el header fijo */
+    padding: 10px 0;
+    margin-bottom: 10px;
 }
 
 .hero {
     background-color: transparent;
     text-align: center;
-    padding: 20px 0;
+    padding: 5px 0;
 }
 
 .hero h2 {
@@ -558,8 +559,6 @@ footer {
 
 .social-media {
     margin-top: 10px;
-
-
 }
 
 .social-media a {
@@ -627,7 +626,7 @@ footer {
 }
 
 /* Accessibility focus styles */
-a:focus, button:focus {
+    a:focus, button:focus {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
 }
@@ -782,11 +781,6 @@ a:focus, button:focus {
     color: white;
 }
 
-/* Ensure content is not hidden behind fixed header */
-body {
-    padding-top: 80px; /* Adjust this value based on your header height */
-}
-
 /* Additional styles for gallery section */
 #galeria {
     padding-top: 20px;
@@ -863,3 +857,6 @@ body {
     color: white;
     font-weight: bold;
 }
+
+/* Import styles from galeria.css */
+@import url('galeria.css');
