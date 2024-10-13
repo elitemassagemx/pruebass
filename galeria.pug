@@ -10,9 +10,10 @@ html(lang="es")
     header.container.mt-4.mb-4
       h1.text-center Galería de Elite Massage
       a.btn.btn-primary(href="index.html") Volver a Inicio
-
     main.container
-      - var max = 18
-      - var imgstr = 511
-      .row#gallery
-        - for(var n=1; n<=max; n
+      #gallery
+        //- El contenido de la galería se generará dinámicamente con JavaScript
+
+    //- Lightboxes se generarán dinámicamente con JavaScript
+
+    script(src="galeria.js")
