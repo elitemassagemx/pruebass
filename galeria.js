@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const BASE_URL = "https://raw.githubusercontent.com/elitemassagemx/Home/main/ICONOS/";
+  const BASE_URL = "https://raw.githubusercontent.com/elitemassagemx/Home/main/IMG/";
 
   const galleryImages = [
     { src: 'QUESOSAHM.webp', title: 'Tabla Gourmet', description: 'Después de tu masaje en pareja saborea una exquisita selección de jamón curado, quesos gourmet, fresas cubiertas de chocolate y copas de vino. Un toque de lujo y placer compartido para complementar tu visita' },
